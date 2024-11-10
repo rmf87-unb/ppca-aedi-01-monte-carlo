@@ -10,7 +10,7 @@ locale.setlocale(locale.LC_ALL, "pt_BR")
 
 st.title("Custo do Apontamento Tardio de Óbitos")
 st.text(
-    "Qual o custo de não se apontar tempestivamente um óbito em uma folha de pagamento? O modelo apresenta estima o potencial prejuízo a partir das variáveis a seguir:"
+    "Qual o custo de não se apontar tempestivamente um óbito em uma folha de pagamento? O modelo estima o potencial prejuízo a partir das variáveis a seguir:"
 )
 # Define parameters
 col1, col2, col3 = st.columns(3, vertical_alignment="bottom")
