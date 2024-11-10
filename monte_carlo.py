@@ -97,8 +97,8 @@ def simulate(
 
 
 def report(run_df: pd.DataFrame, container, simulated_years: int):
-    tab1, tab2, tab3, tab4 = container.tabs(
-        ["Resumo", "Histograma", "Boxplot", "Dispersão"]
+    tab1, tab2, tab3, tab4, tab5 = container.tabs(
+        ["Resumo", "Histograma", "Boxplot", "Dispersão", "Metodologia"]
     )
     mean_value = run_df["Perdas Acumuladas"].mean()
     std_dev = run_df["Perdas Acumuladas"].std()
@@ -131,6 +131,57 @@ def report(run_df: pd.DataFrame, container, simulated_years: int):
 
     tab4.subheader("Gráfico de Dispersão")
     tab4.scatter_chart(data=run_df, x="Perdas Acumuladas", y="Mortes")
+
+    tab5.subheader("Metodologia")
+    tab5.markdown(
+        """
+        Há três distribuições principais no [código](https://github.com/rmf87-unb/ppca-aedi-01-monte-carlo).
+        """
+    )
+    tab5.markdown(
+        """
+        A primeira é uma distribuição de Poisson para estimar, mês a mês, a quantidade de mortes no brasil:
+        """
+    )
+    tab5.code(
+        """
+        # Poisson distribution for total month deaths
+        total_deaths_sampled = np.random.poisson(lambda_d, 12 * simulated_years)
+        """
+    )
+    tab5.markdown(
+        """
+        A segunda é o uso da LogNormal para a distribuição de salários:
+        """
+    )
+    tab5.code(
+        """
+        # Lognormal for salaries
+        sigma = np.sqrt(np.log(1 + (salary_std_dev / salary_mean) ** 2))
+        mean = np.log(salary_mean) - sigma**2 / 2
+        salaries_sampled = np.random.lognormal(mean, sigma, recipients).tolist()
+        """
+    )
+    tab5.markdown(
+        """
+        A última utilizada é a binomial para se sortear as fatalidades na folha:
+        """
+    )
+    tab5.code(
+        """
+        for i, month_deaths in enumerate(total_deaths_sampled):
+            death_ratio = month_deaths / pop_total
+            ## prob deaths per month
+            deaths_sampled = np.random.binomial(1, death_ratio, len(recipients_sampled))
+            dead_indexes = np.nonzero(deaths_sampled)[0]
+        """
+    )
+    tab5.markdown(
+        """
+        A distribuição resultante para o prejuízo estimado, apesar de não demonstrado, aparenta ser gaussiana.
+        Seu histograma e seu boxplot, para experimento com mais de 1000 simulações, tendem ao centro como observamos nas abas ao lado.
+        """
+    )
 
 
 if start_sim_button:
