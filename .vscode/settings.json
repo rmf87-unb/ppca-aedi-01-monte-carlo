@@ -3,15 +3,25 @@
     "aedi",
     "boxplot",
     "carlo",
+    "Casella",
+    "CASELLA",
+    "Heckman",
+    "infty",
     "Interquartílica",
     "lognormal",
+    "mathbb",
     "nbins",
+    "operatorname",
     "plotly",
     "poisson",
     "ppca",
     "quantile",
+    "Raton",
+    "Saltinger",
     "SIRC",
     "stqdm",
-    "streamlit"
+    "streamlit",
+    "textbf",
+    "textit"
   ]
 }
