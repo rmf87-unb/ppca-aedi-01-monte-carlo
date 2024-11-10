@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 numpy = "*"
 streamlit = "*"
-matplotlib = "*"
 pandas = "*"
 plotly = "*"
 stqdm = "*"
