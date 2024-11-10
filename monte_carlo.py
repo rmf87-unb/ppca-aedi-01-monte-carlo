@@ -140,13 +140,32 @@ def report(run_df: pd.DataFrame, container, simulated_years: int):
     )
     tab5.markdown(
         """
-        A primeira é uma distribuição de Poisson para estimar, mês a mês, a quantidade de mortes no brasil:
+        A primeira é uma distribuição de Poisson para estimar, mês a mês, a quantidade de mortes no Brasil.  \n
+        Formalmente:
+        """
+    )
+    tab5.latex(
+        r"""
+        \textbf{Poisson}(\lambda)  \newline
+        \textit{fpm} \quad P(X = x \mid \lambda) = \frac{e^{-\lambda} \lambda^x}{x!}, \quad x = 0, 1, \dots; \quad 0 \leq \lambda < \infty  \newline
+        \textit{média e variância} \quad \mathbb{E}X = \lambda, \quad \operatorname{Var}X = \lambda   \newline
+        \textit{fgm} \quad M_X(t) = e^{\lambda (e^t - 1)}
+        """
+    )
+    tab5.markdown(
+        """
+        Na implementação:
         """
     )
     tab5.code(
         """
         # Poisson distribution for total month deaths
         total_deaths_sampled = np.random.poisson(lambda_d, 12 * simulated_years)
+        """
+    )
+    tab5.markdown(
+        """
+        A aplicação
         """
     )
     tab5.markdown(
