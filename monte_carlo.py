@@ -98,7 +98,7 @@ def simulate(
 
 def report(run_df: pd.DataFrame, container, simulated_years: int):
     tab1, tab2, tab3, tab4, tab5 = container.tabs(
-        ["Resumo", "Histograma", "Boxplot", "Dispersão", "Metodologia"]
+        ["Métricas", "Histograma", "Boxplot", "Dispersão", "Metodologia"]
     )
     mean_value = run_df["Perdas Acumuladas"].mean()
     std_dev = run_df["Perdas Acumuladas"].std()
@@ -110,7 +110,7 @@ def report(run_df: pd.DataFrame, container, simulated_years: int):
         "Perdas Acumuladas"
     ].quantile(0.25)
 
-    tab1.subheader("Resumo")
+    tab1.subheader("Métricas")
     col1, col2 = tab1.columns(2, vertical_alignment="bottom")
     col1.text(f"Prejuízo Estimado: {locale.currency(mean_value, grouping=True)}")
     col2.text(f"Mediana de Mortes em {simulated_years} anos: {medianDeaths}")
